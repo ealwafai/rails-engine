@@ -1,8 +1,4 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require 'rspec/rails'
-require 'support/factory_bot'
-require 'faker'
-require 'webmock/rspec'
 
 require 'simplecov'
 SimpleCov.start

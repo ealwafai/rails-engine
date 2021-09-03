@@ -2,6 +2,7 @@
 require 'rspec/rails'
 require 'support/factory_bot'
 require 'faker'
+require 'webmock/rspec'
 
 require 'simplecov'
 SimpleCov.start

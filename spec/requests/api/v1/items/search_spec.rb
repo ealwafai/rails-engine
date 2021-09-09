@@ -14,7 +14,7 @@ RSpec.describe 'search items' do
           item_2 = create(:item, name: 'book on south star', merchant: @merchant_2)
           item_3 = create(:item, name: 'book on galaxies', merchant: @merchant_2)
 
-          get "/api/v1/items/find_all", params: { name: 'star'}
+          get '/api/v1/items/find_all', params: { name: 'star' }
 
           expect(response).to have_http_status(200)
 
@@ -25,20 +25,19 @@ RSpec.describe 'search items' do
 
           first_item = result[:data].first
           expect(first_item[:id]).to eq(item_2.id.to_s)
-          expect(first_item[:type]).to eq("item")
+          expect(first_item[:type]).to eq('item')
           expect(first_item[:attributes][:name]).to eq(item_2.name)
 
           second_item = result[:data].second
           expect(second_item[:id]).to eq(item_1.id.to_s)
-          expect(second_item[:type]).to eq("item")
+          expect(second_item[:type]).to eq('item')
           expect(second_item[:attributes][:name]).to eq(item_1.name)
         end
       end
 
       context 'no matches found' do
         it 'returns a 200 status code and empty array' do
-
-          get "/api/v1/items/find_all", params: { name: 'star'}
+          get '/api/v1/items/find_all', params: { name: 'star' }
 
           expect(response).to have_http_status(200)
 
@@ -58,7 +57,7 @@ RSpec.describe 'search items' do
           item_3 = create(:item, unit_price: 85.00, merchant: @merchant_2)
           item_4 = create(:item, unit_price: 40.00, merchant: @merchant_2)
 
-          get "/api/v1/items/find_all", params: { min_price: 70 }
+          get '/api/v1/items/find_all', params: { min_price: 70 }
 
           expect(response).to have_http_status(200)
 
@@ -76,7 +75,7 @@ RSpec.describe 'search items' do
           item_3 = create(:item, unit_price: 85.00, merchant: @merchant_2)
           item_4 = create(:item, unit_price: 200.00, merchant: @merchant_2)
 
-          get "/api/v1/items/find_all", params: { max_price: 150 }
+          get '/api/v1/items/find_all', params: { max_price: 150 }
 
           expect(response).to have_http_status(200)
 
@@ -94,7 +93,7 @@ RSpec.describe 'search items' do
           item_3 = create(:item, unit_price: 90.00, merchant: @merchant_2)
           item_4 = create(:item, unit_price: 60.00, merchant: @merchant_2)
 
-          get "/api/v1/items/find_all", params: { min_price: 70, max_price: 150 }
+          get '/api/v1/items/find_all', params: { min_price: 70, max_price: 150 }
 
           expect(response).to have_http_status(200)
 
@@ -110,7 +109,7 @@ RSpec.describe 'search items' do
       it 'returns an error and 400 status code' do
         item = create(:item, name: 'Gourd of the Rings', merchant: @merchant_1)
 
-        get "/api/v1/items/find_all", params: { name: 'star', max_price: 100.00 }
+        get '/api/v1/items/find_all', params: { name: 'star', max_price: 100.00 }
 
         expect(response).to have_http_status(400)
       end
@@ -120,7 +119,7 @@ RSpec.describe 'search items' do
       it 'returns an error and 400 status code' do
         item = create(:item, name: 'Book on North Star', merchant: @merchant_1)
 
-        get "/api/v1/items/find_all", params: { name: nil }
+        get '/api/v1/items/find_all', params: { name: nil }
 
         expect(response).to have_http_status(400)
       end

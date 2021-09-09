@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Items API Requests" do
+RSpec.describe 'Items API Requests' do
   describe 'GET /items' do
     context 'params are not specified' do
       it 'sends a list of first 20 items' do
@@ -18,7 +18,7 @@ RSpec.describe "Items API Requests" do
           expect(item[:id]).to be_an(String)
 
           expect(item).to have_key(:type)
-          expect(item[:type]).to eq("item")
+          expect(item[:type]).to eq('item')
 
           expect(item).to have_key(:attributes)
           expect(item[:attributes]).to be_a Hash
@@ -44,8 +44,7 @@ RSpec.describe "Items API Requests" do
           merchant = create(:merchant)
           create_list(:item, 30, merchant_id: merchant.id)
 
-          get '/api/v1/items', params: {per_page: 10}
-
+          get '/api/v1/items', params: { per_page: 10 }
 
           items = JSON.parse(response.body, symbolize_names: true)
 
@@ -60,7 +59,7 @@ RSpec.describe "Items API Requests" do
           merchant = create(:merchant)
           create_list(:item, 30, merchant_id: merchant.id)
 
-          get '/api/v1/items', params: {page: 2}
+          get '/api/v1/items', params: { page: 2 }
 
           items = JSON.parse(response.body, symbolize_names: true)
 
@@ -75,8 +74,7 @@ RSpec.describe "Items API Requests" do
           merchant = create(:merchant)
           create_list(:item, 30, merchant_id: merchant.id)
 
-          get '/api/v1/items', params: {page: 2, per_page: 10}
-
+          get '/api/v1/items', params: { page: 2, per_page: 10 }
 
           items = JSON.parse(response.body, symbolize_names: true)
 
@@ -113,7 +111,7 @@ RSpec.describe "Items API Requests" do
 
         data = item[:data]
         expect(data[:id]).to eq item_1.id.to_s
-        expect(data[:type]).to eq "item"
+        expect(data[:type]).to eq 'item'
         expect(data[:attributes]).to be_a Hash
 
         expect(data[:attributes]).to have_key(:name)
@@ -132,7 +130,7 @@ RSpec.describe "Items API Requests" do
 
     context 'item does not exist' do
       it 'returns a status code 404' do
-        get "/api/v1/items/#{123456}"
+        get '/api/v1/items/123456'
 
         expect(response).to have_http_status(404)
         expect(response.body).to match(/Couldn't find Item/)
@@ -141,7 +139,7 @@ RSpec.describe "Items API Requests" do
 
     context 'request is not valid' do
       it 'returns a status code 404' do
-        get "/api/v1/items/string"
+        get '/api/v1/items/string'
 
         expect(response).to have_http_status(404)
         expect(response.body).to match(/Couldn't find Item/)
@@ -154,8 +152,8 @@ RSpec.describe "Items API Requests" do
       it 'creates an item and returns a 201 status code' do
         merchant = create(:merchant)
         params = {
-          name: "New Item",
-          description: "This is a new item.",
+          name: 'New Item',
+          description: 'This is a new item.',
           unit_price: 104.50,
           merchant_id: merchant.id
         }
@@ -174,7 +172,7 @@ RSpec.describe "Items API Requests" do
 
         data = item[:data]
         expect(data[:id]).to eq merchant.items.last.id.to_s
-        expect(data[:type]).to eq "item"
+        expect(data[:type]).to eq 'item'
         expect(data[:attributes]).to be_a Hash
 
         expect(data[:attributes]).to have_key(:name)
@@ -195,8 +193,8 @@ RSpec.describe "Items API Requests" do
       it 'returns a failure message and 422 status code' do
         merchant = create(:merchant)
         params = {
-          name: "New Item",
-          description: "This is a new item.",
+          name: 'New Item',
+          description: 'This is a new item.',
           unit_price: 'price',
           merchant_id: merchant.id
         }
@@ -208,8 +206,8 @@ RSpec.describe "Items API Requests" do
 
       it 'cannot create an item without a valid merchant id' do
         params = {
-          name: "New Item",
-          description: "This is a new item.",
+          name: 'New Item',
+          description: 'This is a new item.',
           unit_price: 104.50,
           merchant_id: 17
         }
@@ -224,7 +222,7 @@ RSpec.describe "Items API Requests" do
       it 'returns a failure message and status code 422' do
         merchant = create(:merchant)
         params = {
-          name: "New Item",
+          name: 'New Item',
           unit_price: 104.50,
           merchant_id: merchant.id
         }
@@ -244,8 +242,8 @@ RSpec.describe "Items API Requests" do
           merchant = create(:merchant)
           item = create(:item, merchant: merchant)
           params = {
-            name: "New Item",
-            description: "new item",
+            name: 'New Item',
+            description: 'new item',
             unit_price: 104.50,
             merchant_id: merchant.id
           }
@@ -267,7 +265,7 @@ RSpec.describe "Items API Requests" do
 
           data = response_item[:data]
           expect(data[:id]).to eq item.id.to_s
-          expect(data[:type]).to eq "item"
+          expect(data[:type]).to eq 'item'
           expect(data[:attributes]).to be_a Hash
 
           expect(data[:attributes]).to have_key(:name)
@@ -289,7 +287,7 @@ RSpec.describe "Items API Requests" do
           merchant = create(:merchant)
           item = create(:item, merchant: merchant)
           params = {
-            unit_price: 104.50,
+            unit_price: 104.50
           }
 
           patch "/api/v1/items/#{item.id}", params: params
@@ -309,7 +307,7 @@ RSpec.describe "Items API Requests" do
 
           data = response_item[:data]
           expect(data[:id]).to eq item.id.to_s
-          expect(data[:type]).to eq "item"
+          expect(data[:type]).to eq 'item'
           expect(data[:attributes]).to be_a Hash
 
           expect(data[:attributes]).to have_key(:name)
@@ -331,8 +329,8 @@ RSpec.describe "Items API Requests" do
           merchant = create(:merchant)
           item = create(:item, merchant: merchant)
           params = {
-            name: "New Item",
-            description: "new item",
+            name: 'New Item',
+            description: 'new item',
             merchant_id: 999
           }
 
@@ -348,8 +346,8 @@ RSpec.describe "Items API Requests" do
           merchant = create(:merchant)
           item = create(:item, merchant: merchant)
           params = {
-            name: "New Item",
-            description: "new item",
+            name: 'New Item',
+            description: 'new item',
             unit_price: 'price',
             merchant_id: merchant.id
           }
@@ -369,7 +367,7 @@ RSpec.describe "Items API Requests" do
           item = create(:item, merchant: merchant)
           params = {
             unit_price: 104.50,
-            extra_param: "select * from merchants;",
+            extra_param: 'select * from merchants;'
           }
 
           patch "/api/v1/items/#{item.id}", params: params
@@ -389,7 +387,7 @@ RSpec.describe "Items API Requests" do
 
           data = response_item[:data]
           expect(data[:id]).to eq item.id.to_s
-          expect(data[:type]).to eq "item"
+          expect(data[:type]).to eq 'item'
           expect(data[:attributes]).to be_a Hash
 
           expect(data[:attributes]).not_to have_key(:extra_param)
@@ -406,13 +404,13 @@ RSpec.describe "Items API Requests" do
       it 'returns a failure message and 404 status code' do
         merchant = create(:merchant)
         params = {
-          name: "New Item",
-          description: "This is a new item.",
+          name: 'New Item',
+          description: 'This is a new item.',
           unit_price: 104.50,
           merchant_id: merchant.id
         }
 
-        patch "/api/v1/items/string_id", params: params
+        patch '/api/v1/items/string_id', params: params
 
         expect(response).to have_http_status(404)
         expect(response.body).to match(/Couldn't find Item/)
@@ -437,7 +435,7 @@ RSpec.describe "Items API Requests" do
       it 'returns a failure message and 404 status code' do
         merchant = create(:merchant)
 
-        delete "/api/v1/items/12345"
+        delete '/api/v1/items/12345'
 
         expect(response).to have_http_status(404)
         expect(response.body).to match(/Couldn't find Item/)

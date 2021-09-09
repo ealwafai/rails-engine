@@ -1,5 +1,4 @@
 class Api::V1::Merchants::SearchController < ApplicationController
-
   def find
     @merchant = Merchant.find_by_name(params[:name])
 

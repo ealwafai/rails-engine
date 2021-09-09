@@ -8,7 +8,7 @@ class Item < ApplicationRecord
 
   def self.search_by_name(query)
     var = where('name ilike ?', "%#{query}%")
-    .order(Arel.sql('lower(name) desc')).to_a
+          .order(Arel.sql('lower(name) desc')).to_a
   end
 
   def self.search_by_price(price)

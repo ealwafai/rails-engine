@@ -9,7 +9,7 @@ RSpec.describe 'search merchants' do
           merchant_2 = create(:merchant, name: 'Brett')
           merchant_3 = create(:merchant, name: 'Brian')
 
-          get "/api/v1/merchants/find", params: { name: 'Bre'}
+          get '/api/v1/merchants/find', params: { name: 'Bre' }
 
           expect(response).to have_http_status(200)
 
@@ -19,7 +19,7 @@ RSpec.describe 'search merchants' do
 
           data = result[:data]
           expect(data[:id]).to eq merchant_2.id.to_s
-          expect(data[:type]).to eq "merchant"
+          expect(data[:type]).to eq 'merchant'
           expect(data[:attributes]).to be_a Hash
 
           expect(data[:attributes]).to have_key(:name)
@@ -33,7 +33,7 @@ RSpec.describe 'search merchants' do
           merchant_2 = create(:merchant, name: 'Brett')
           merchant_3 = create(:merchant, name: 'Brian')
 
-          get "/api/v1/merchants/find", params: { name: 'br'}
+          get '/api/v1/merchants/find', params: { name: 'br' }
 
           expect(response).to have_http_status(200)
 
@@ -43,7 +43,7 @@ RSpec.describe 'search merchants' do
 
           data = result[:data]
           expect(data[:id]).to eq merchant_2.id.to_s
-          expect(data[:type]).to eq "merchant"
+          expect(data[:type]).to eq 'merchant'
           expect(data[:attributes]).to be_a Hash
 
           expect(data[:attributes]).to have_key(:name)
@@ -58,7 +58,7 @@ RSpec.describe 'search merchants' do
         merchant_2 = create(:merchant, name: 'Brett')
         merchant_3 = create(:merchant, name: 'Brian')
 
-        get "/api/v1/merchants/find", params: { name: 'Sam'}
+        get '/api/v1/merchants/find', params: { name: 'Sam' }
 
         expect(response).to have_http_status(200)
 

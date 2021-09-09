@@ -1,6 +1,4 @@
 class Api::V1::Items::SearchController < ApplicationController
-  include Response
-  include ExceptionHandler
 
   def find_all
     @items = search_items(params)

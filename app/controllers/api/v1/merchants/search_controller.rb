@@ -1,6 +1,4 @@
 class Api::V1::Merchants::SearchController < ApplicationController
-  include Response
-  include ExceptionHandler
 
   def find
     @merchant = Merchant.find_by_name(params[:name])

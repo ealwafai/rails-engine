@@ -1,6 +1,4 @@
 class Api::V1::MerchantsController < ApplicationController
-  include Response
-  include ExceptionHandler
 
   def index
     if params[:page] && params[:per_page]
@@ -12,7 +10,7 @@ class Api::V1::MerchantsController < ApplicationController
     else
       merchants = Merchant.paginate(page: 1, per_page: 20)
     end
-    render json: MerchantSerializer.new(merchants)
+    json_response(MerchantSerializer.new(merchants))
   end
 
   def show

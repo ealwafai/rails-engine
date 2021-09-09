@@ -6,7 +6,6 @@ module ExceptionHandler
       json_response({ message: e.message }, :not_found)
     end
     rescue_from ActiveRecord::RecordInvalid, with: :four_twenty_two
-    rescue_from ExceptionHandler::MissingToken, with: :four_twenty_two
   end
 
   private

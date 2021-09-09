@@ -13,17 +13,20 @@ RSpec.describe 'requests for total revenue within date range' do
     @item_5 = create(:item, merchant: @merchant_2)
     @item_6 = create(:item, merchant: @merchant_2)
 
-    @invoice_1 = create(:invoice, customer: @customer, merchant: @merchant_1, status: 'shipped', created_at: Time.parse('2021-09-01'))
+    @invoice_1 = create(:invoice, customer: @customer, merchant: @merchant_1, status: 'shipped',
+                                  created_at: Time.parse('2021-09-01'))
     @transaction_1 = create(:transaction, invoice: @invoice_1, result: 'success')
     @invoice_item_1 = create(:invoice_item, invoice: @invoice_1, item: @item_1, unit_price: 20.00)
 
     @invoice_item_2 = create(:invoice_item, invoice: @invoice_1, item: @item_2, unit_price: 25.00)
 
-    @invoice_2 = create(:invoice, customer: @customer, merchant: @merchant_1, status: 'pending', created_at: Time.parse('2021-08-01'))
+    @invoice_2 = create(:invoice, customer: @customer, merchant: @merchant_1, status: 'pending',
+                                  created_at: Time.parse('2021-08-01'))
     @transaction_2 = create(:transaction, invoice: @invoice_2, result: 'success')
     @invoice_item_3 = create(:invoice_item, invoice: @invoice_2, item: @item_3, unit_price: 30.00)
 
-    @invoice_3 = create(:invoice, customer: @customer, merchant: @merchant_1, status: 'shipped', created_at: Time.parse('2021-08-01'))
+    @invoice_3 = create(:invoice, customer: @customer, merchant: @merchant_1, status: 'shipped',
+                                  created_at: Time.parse('2021-08-01'))
     @transaction_3 = create(:transaction, invoice: @invoice_3, result: 'failure')
     @invoice_item_4 = create(:invoice_item, invoice: @invoice_3, item: @item_4, unit_price: 40.00)
 
@@ -38,7 +41,7 @@ RSpec.describe 'requests for total revenue within date range' do
 
   context 'start and end dates are valid' do
     it 'returns the total revenue for a specific range' do
-      get '/api/v1/revenue', params: {start: '2021-07-01', end: '2021-09-01'}
+      get '/api/v1/revenue', params: { start: '2021-07-01', end: '2021-09-01' }
 
       expect(response).to have_http_status(200)
 
@@ -54,7 +57,7 @@ RSpec.describe 'requests for total revenue within date range' do
 
   context 'start date is missing' do
     it 'returns an error message and 400 status code' do
-      get '/api/v1/revenue', params: {end: '2021-09-01'}
+      get '/api/v1/revenue', params: { end: '2021-09-01' }
 
       expect(response).to have_http_status(400)
       expect(response.body).to match(/Bad request/)
@@ -63,7 +66,7 @@ RSpec.describe 'requests for total revenue within date range' do
 
   context 'end date is missing' do
     it 'returns an error message and 400 status code' do
-      get '/api/v1/revenue', params: {start: '2021-07-01'}
+      get '/api/v1/revenue', params: { start: '2021-07-01' }
 
       expect(response).to have_http_status(400)
       expect(response.body).to match(/Bad request/)
@@ -81,7 +84,7 @@ RSpec.describe 'requests for total revenue within date range' do
 
   context 'date format is invalid' do
     it 'returns an error message and 400 status code' do
-      get '/api/v1/revenue', params: {start: 'string', end: ''}
+      get '/api/v1/revenue', params: { start: 'string', end: '' }
 
       expect(response).to have_http_status(400)
       expect(response.body).to match(/Bad request/)
@@ -90,7 +93,7 @@ RSpec.describe 'requests for total revenue within date range' do
 
   context 'start date comes after end date' do
     it 'returns an error message and 400 status code' do
-      get '/api/v1/revenue', params: {start: '2021-09-01', end: '2021-07-01'}
+      get '/api/v1/revenue', params: { start: '2021-09-01', end: '2021-07-01' }
 
       expect(response).to have_http_status(400)
       expect(response.body).to match(/Bad request/)

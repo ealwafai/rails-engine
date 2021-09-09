@@ -12,7 +12,7 @@ RSpec.describe 'Items by revenue' do
         end
       end
 
-      get '/api/v1/revenue/items', params: {quantity: 5}
+      get '/api/v1/revenue/items', params: { quantity: 5 }
 
       expect(response).to have_http_status(200)
 
@@ -31,14 +31,14 @@ RSpec.describe 'Items by revenue' do
 
   context 'quantity is specified but invalid' do
     it 'returns error message and 400 status code' do
-      get '/api/v1/revenue/items', params: {quantity: -1}
+      get '/api/v1/revenue/items', params: { quantity: -1 }
 
       expect(response).to have_http_status(400)
       expect(response.body).to match(/Bad request/)
     end
 
     it 'returns error message and 400 status code' do
-      get '/api/v1/revenue/items', params: {quantity: 'string'}
+      get '/api/v1/revenue/items', params: { quantity: 'string' }
 
       expect(response).to have_http_status(400)
       expect(response.body).to match(/Bad request/)

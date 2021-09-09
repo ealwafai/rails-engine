@@ -7,8 +7,8 @@ class Item < ApplicationRecord
   validates :unit_price, numericality: { greater_than: 0.0 }
 
   def self.search_by_name(query)
-          where('name ilike ?', "%#{query}%")
-          .order(Arel.sql('lower(name) desc')).to_a
+    where('name ilike ?', "%#{query}%")
+      .order(Arel.sql('lower(name) desc')).to_a
   end
 
   def self.search_by_price(price)
@@ -23,10 +23,10 @@ class Item < ApplicationRecord
 
   def self.order_by_revenue(count)
     var = joins(invoices: :transactions)
-      .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
-      .where(invoices: { status: 'shipped' }, transactions: { result: 'success' })
-      .group(:id)
-      .order('revenue desc')
-      .limit(count)
+          .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
+          .where(invoices: { status: 'shipped' }, transactions: { result: 'success' })
+          .group(:id)
+          .order('revenue desc')
+          .limit(count)
   end
 end

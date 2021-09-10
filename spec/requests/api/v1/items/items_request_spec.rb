@@ -377,7 +377,7 @@ RSpec.describe 'Items API Requests' do
           expect(response).to have_http_status(202)
 
           expect(updated_item.name).to eq(item.name)
-          expect(updated_item.description).to eq(item.descri)ption
+          expect(updated_item.description).to eq(item.description)
           expect(updated_item.unit_price).to eq(params[:unit_price])
           expect(updated_item.merchant_id).to eq(merchant.id)
 

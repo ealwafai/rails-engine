@@ -17,7 +17,7 @@ RSpec.describe 'item merchant requests' do
 
         data = result[:data]
         expect(data[:id]).to eq(merchant.id.to_s)
-        expect(data[:type]).to eq("merchant")
+        expect(data[:type]).to eq('merchant')
         expect(data[:attributes]).to be_a(Hash)
 
         expect(data[:attributes]).to have_key(:name)
@@ -29,7 +29,7 @@ RSpec.describe 'item merchant requests' do
       it 'returns an error message and 404 status code' do
         merchant = create(:merchant)
 
-        get "/api/v1/items/123456/merchant"
+        get '/api/v1/items/123456/merchant'
 
         expect(response).to have_http_status(404)
         expect(response.body).to match(/Couldn't find Item/)
@@ -41,7 +41,7 @@ RSpec.describe 'item merchant requests' do
         merchant = create(:merchant)
         item = create(:item, merchant: merchant)
 
-        get "/api/v1/items/string/merchant"
+        get '/api/v1/items/string/merchant'
 
         expect(response).to have_http_status(404)
         expect(response.body).to match(/Couldn't find Item/)

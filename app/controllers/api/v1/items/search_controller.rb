@@ -1,5 +1,4 @@
 class Api::V1::Items::SearchController < ApplicationController
-
   def find_all
     @items = search_items(params)
     return json_response('', :bad_request) unless valid_search?(params)

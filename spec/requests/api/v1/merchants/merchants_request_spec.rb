@@ -17,7 +17,7 @@ RSpec.describe 'Merchants API Requests' do
           expect(merchant[:id]).to be_an(String)
 
           expect(merchant).to have_key(:type)
-          expect(merchant[:type]).to eq("merchant")
+          expect(merchant[:type]).to eq('merchant')
 
           expect(merchant).to have_key(:attributes)
           expect(merchant[:attributes]).to be_a(Hash)
@@ -35,9 +35,7 @@ RSpec.describe 'Merchants API Requests' do
 
           all_merchants = Merchant.all
 
-          get '/api/v1/merchants', params: {per_page: 10}
-
-
+          get '/api/v1/merchants', params: { per_page: 10 }
 
           merchants = JSON.parse(response.body, symbolize_names: true)
 
@@ -50,7 +48,7 @@ RSpec.describe 'Merchants API Requests' do
             expect(merchant[:id]).to be_an(String)
 
             expect(merchant).to have_key(:type)
-            expect(merchant[:type]).to eq("merchant")
+            expect(merchant[:type]).to eq('merchant')
 
             expect(merchant).to have_key(:attributes)
             expect(merchant[:attributes]).to be_a(Hash)
@@ -67,9 +65,7 @@ RSpec.describe 'Merchants API Requests' do
 
           all_merchants = Merchant.all
 
-          get '/api/v1/merchants', params: {page: 2}
-
-
+          get '/api/v1/merchants', params: { page: 2 }
 
           merchants = JSON.parse(response.body, symbolize_names: true)
 
@@ -82,7 +78,7 @@ RSpec.describe 'Merchants API Requests' do
             expect(merchant[:id]).to be_an(String)
 
             expect(merchant).to have_key(:type)
-            expect(merchant[:type]).to eq("merchant")
+            expect(merchant[:type]).to eq('merchant')
 
             expect(merchant).to have_key(:attributes)
             expect(merchant[:attributes]).to be_a(Hash)
@@ -97,9 +93,7 @@ RSpec.describe 'Merchants API Requests' do
 
           all_merchants = Merchant.all
 
-          get '/api/v1/merchants', params: {page: -1}
-
-
+          get '/api/v1/merchants', params: { page: -1 }
 
           merchants = JSON.parse(response.body, symbolize_names: true)
 
@@ -112,7 +106,7 @@ RSpec.describe 'Merchants API Requests' do
             expect(merchant[:id]).to be_an(String)
 
             expect(merchant).to have_key(:type)
-            expect(merchant[:type]).to eq("merchant")
+            expect(merchant[:type]).to eq('merchant')
 
             expect(merchant).to have_key(:attributes)
             expect(merchant[:attributes]).to be_a(Hash)
@@ -129,9 +123,7 @@ RSpec.describe 'Merchants API Requests' do
 
           all_merchants = Merchant.all
 
-          get '/api/v1/merchants', params: {page: 2, per_page: 10}
-
-
+          get '/api/v1/merchants', params: { page: 2, per_page: 10 }
 
           merchants = JSON.parse(response.body, symbolize_names: true)
 
@@ -144,7 +136,7 @@ RSpec.describe 'Merchants API Requests' do
             expect(merchant[:id]).to be_an(String)
 
             expect(merchant).to have_key(:type)
-            expect(merchant[:type]).to eq("merchant")
+            expect(merchant[:type]).to eq('merchant')
 
             expect(merchant).to have_key(:attributes)
             expect(merchant[:attributes]).to be_a(Hash)
@@ -180,7 +172,7 @@ RSpec.describe 'Merchants API Requests' do
 
         data = merchant[:data]
         expect(data[:id]).to eq(merchant_1.id.to_s)
-        expect(data[:type]).to eq("merchant")
+        expect(data[:type]).to eq('merchant')
         expect(data[:attributes]).to be_a(Hash)
 
         expect(data[:attributes]).to have_key(:name)
@@ -190,7 +182,7 @@ RSpec.describe 'Merchants API Requests' do
 
     context 'merchant does not exist' do
       it 'returns a status code 404' do
-        get "/api/v1/merchants/#{123456}"
+        get '/api/v1/merchants/123456'
 
         expect(response).to have_http_status(404)
         expect(response.body).to match(/Couldn't find Merchant/)
@@ -199,7 +191,7 @@ RSpec.describe 'Merchants API Requests' do
 
     context 'request is not valid' do
       it 'returns a status code 404' do
-        get "/api/v1/merchants/whatever"
+        get '/api/v1/merchants/whatever'
 
         expect(response).to have_http_status(404)
         expect(response.body).to match(/Couldn't find Merchant/)

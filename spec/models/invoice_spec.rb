@@ -69,5 +69,18 @@ RSpec.describe Invoice do
         expect(Invoice.revenue_per_range(start_date, end_date)).to eq(0.00)
       end
     end
+
+    describe 'revenue_per_week' do
+      it 'returns revenue per week' do
+        weekly_revenue = Invoice.revenue_per_week
+
+        expect(weekly_revenue).to be_an(Array)
+        expect(weekly_revenue.length).to eq(3)
+        expect(weekly_revenue.first.week.to_s).to eq('2021-03-29')
+        expect(weekly_revenue.first.revenue).to eq(150.00)
+        expect(weekly_revenue.last.week.to_s).to eq('2021-08-30')
+        expect(weekly_revenue.last.revenue).to eq(250.00)
+      end
+    end
   end
 end

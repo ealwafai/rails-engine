@@ -14,14 +14,14 @@ class RevenueSerializer
 
   def self.weekly_revenue(weeks)
     { data: weeks.map do |week|
-            {
-              id: nil,
-              type: 'weekly_revenue',
-              attributes: {
-                week: week.week.to_s,
-                revenue: week.revenue
+              {
+                id: nil,
+                type: 'weekly_revenue',
+                attributes: {
+                  week: week.week.to_s,
+                  revenue: week.revenue
+                }
               }
-            }
-          end }
+            end }
   end
 end

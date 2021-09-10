@@ -1,5 +1,4 @@
 class Api::V1::RevenueController < ApplicationController
-
   def index
     @weeks = Invoice.revenue_per_week
     json_response(RevenueSerializer.weekly_revenue(@weeks))

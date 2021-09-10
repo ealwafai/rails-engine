@@ -22,7 +22,7 @@ class Item < ApplicationRecord
   end
 
   def self.order_by_revenue(count)
-    var = joins(invoices: :transactions)
+     joins(invoices: :transactions)
           .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
           .where(invoices: { status: 'shipped' }, transactions: { result: 'success' })
           .group(:id)

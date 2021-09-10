@@ -56,7 +56,7 @@ RSpec.describe 'merchant items requests' do
 
     context 'merchant does not exist' do
       it 'returns an error message and 404 status code' do
-        get '/api/v1/merchants/123456/items'
+        get '/api/v1/merchants/string/items'
 
         expect(response).to have_http_status(404)
         expect(response.body).to match(/Couldn't find Merchant/)

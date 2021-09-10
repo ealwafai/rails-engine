@@ -376,19 +376,19 @@ RSpec.describe 'Items API Requests' do
 
           expect(response).to have_http_status(202)
 
-          expect(updated_item.name).to eq item.name
-          expect(updated_item.description).to eq item.description
-          expect(updated_item.unit_price).to eq params[:unit_price]
-          expect(updated_item.merchant_id).to eq merchant.id
+          expect(updated_item.name).to eq(item.name)
+          expect(updated_item.description).to eq(item.descri)ption
+          expect(updated_item.unit_price).to eq(params[:unit_price])
+          expect(updated_item.merchant_id).to eq(merchant.id)
 
           response_item = JSON.parse(response.body, symbolize_names: true)
 
-          expect(response_item[:data]).to be_a Hash
+          expect(response_item[:data]).to be_a(Hash)
 
           data = response_item[:data]
-          expect(data[:id]).to eq item.id.to_s
-          expect(data[:type]).to eq 'item'
-          expect(data[:attributes]).to be_a Hash
+          expect(data[:id]).to eq(item.id.to_s)
+          expect(data[:type]).to eq('item')
+          expect(data[:attributes]).to be_a(Hash)
 
           expect(data[:attributes]).not_to have_key(:extra_param)
 
@@ -405,7 +405,7 @@ RSpec.describe 'Items API Requests' do
         merchant = create(:merchant)
         params = {
           name: 'New Item',
-          description: 'This is a new item.',
+          description: 'new item',
           unit_price: 104.50,
           merchant_id: merchant.id
         }
